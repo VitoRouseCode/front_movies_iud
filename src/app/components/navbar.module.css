@@ -1,0 +1,39 @@
+.navbarCustom {
+    background-color: #6f42c1; /* Morado principal */
+  }
+  
+  .navbarCustom .navbar-brand,
+  .navbarCustom .nav-link {
+    color: white ; /* Texto blanco */
+  }
+  
+  .navbarCustom .nav-link:hover,
+  .navbarCustom .navbar-brand:hover {
+    color: #e6d9ff; /* Un blanco más suave al pasar el ratón, para contraste */
+  }
+  
+  .navbarCustom .dropdown-menu {
+    background-color: #6f42c1; /* Fondo del dropdown */
+  }
+  
+  .navbarCustom .dropdown-item {
+    color: white; /* Texto blanco en el dropdown */
+  }
+  
+  .navbarCustom .dropdown-item:hover {
+    background-color: #5a32a3; /* Morado más oscuro al pasar el ratón */
+    color: white;
+  }
+  
+  .navbarCustom .btnSearch {
+    background-color: #6f42c1; /* Botón de búsqueda con el mismo morado */
+    border-color: #6f42c1;
+    color: white;
+  }
+  
+  .navbarCustom .btnSearch:hover {
+    background-color: #5a32a3; /* Morado más oscuro al pasar el ratón */
+    border-color: #5a32a3;
+    color: white;
+  }
+

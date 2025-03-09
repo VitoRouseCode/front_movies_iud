@@ -1,0 +1,4 @@
+.moviesContainer {
+    min-height: 80vh; /* Altura mínima para cubrir la pantalla */
+    background-color: #f8f9fa; /* Fondo gris claro */
+  }

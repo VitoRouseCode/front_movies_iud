@@ -1,0 +1,8 @@
+/* Puedes personalizar más si quieres */
+.card {
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }

@@ -1,0 +1,12 @@
+.directorsContainer {
+    border-style: solid;
+    border-color: #6f42c1;
+    border-width: 2px;
+    border-radius: 10px;
+    margin: 5rem 12rem 5rem 12rem;
+    padding: 2rem;
+    min-height:fit-content;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+  }
