@@ -1,39 +1,38 @@
 .navbarCustom {
-    background-color: #6f42c1; /* Morado principal */
-  }
-  
-  .navbarCustom .navbar-brand,
-  .navbarCustom .nav-link {
-    color: white ; /* Texto blanco */
-  }
-  
-  .navbarCustom .nav-link:hover,
-  .navbarCustom .navbar-brand:hover {
-    color: #e6d9ff; /* Un blanco más suave al pasar el ratón, para contraste */
-  }
-  
-  .navbarCustom .dropdown-menu {
-    background-color: #6f42c1; /* Fondo del dropdown */
-  }
-  
-  .navbarCustom .dropdown-item {
-    color: white; /* Texto blanco en el dropdown */
-  }
-  
-  .navbarCustom .dropdown-item:hover {
-    background-color: #5a32a3; /* Morado más oscuro al pasar el ratón */
-    color: white;
-  }
-  
-  .navbarCustom .btnSearch {
-    background-color: #6f42c1; /* Botón de búsqueda con el mismo morado */
-    border-color: #6f42c1;
-    color: white;
-  }
-  
-  .navbarCustom .btnSearch:hover {
-    background-color: #5a32a3; /* Morado más oscuro al pasar el ratón */
-    border-color: #5a32a3;
-    color: white;
-  }
+  background-color: #000000; /* Negro puro */
+}
 
+.navbarCustom .navbar-brand,
+.navbarCustom .nav-link {
+  color: #ffffff; /* Blanco puro */
+}
+
+.navbarCustom .nav-link:hover,
+.navbarCustom .navbar-brand:hover {
+  color: #d3d3d3; /* Gris claro para hover, sutil contraste */
+}
+
+.navbarCustom .dropdown-menu {
+  background-color: #000000; /* Fondo negro para el dropdown */
+}
+
+.navbarCustom .dropdown-item {
+  color: #ffffff; /* Texto blanco en el dropdown */
+}
+
+.navbarCustom .dropdown-item:hover {
+  background-color: #333333; /* Gris oscuro para hover en dropdown */
+  color: #ffffff; /* Mantiene el blanco */
+}
+
+.navbarCustom .btnSearch {
+  background-color: #000000; /* Negro para el botón de búsqueda */
+  border-color: #ffffff; /* Borde blanco para destacar */
+  color: #ffffff; /* Texto blanco */
+}
+
+.navbarCustom .btnSearch:hover {
+  background-color: #333333; /* Gris oscuro para hover */
+  border-color: #d3d3d3; /* Borde gris claro en hover */
+  color: #ffffff; /* Texto blanco */
+}

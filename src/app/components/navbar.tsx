@@ -1,9 +1,15 @@
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import styles from './Navbar.module.css';
 import Image from 'next/image';
 import image from '../../../public/logopeliculas.png';
 
 const Navbar = () => {
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.bundle.min.js');
+  }, []);
+
+  
   return (
     <nav className={`navbar navbar-expand-lg ${styles.navbarCustom}`}>
       <div className="container-fluid">
@@ -22,10 +28,14 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" style={{color:"white"}} href="/">Inicio</a>
+              <a className="nav-link active" aria-current="page" 
+              style={{color:"white"}} href="/"><i style={{marginLeft:'15px',marginRight:'5px', fontSize: '1.2rem'}} 
+              className="bi bi-house"></i>INICIO</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" style={{color:"white"}} href="/movies">Películas</a>
+              <a className="nav-link" style={{color:"white"}} href="/movies"><i 
+              style={{marginLeft:'15px',marginRight:'5px',fontSize: '1.2rem'}} 
+              className="bi bi-film"></i>PELICULAS</a>
             </li>
             <li className="nav-item dropdown" style={{color:"white"}}>
               <a
@@ -36,14 +46,19 @@ const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 style={{color:"white"}}
-              >
-                Categorías
+              ><i style={{marginLeft:'15px',marginRight:'5px',fontSize: '1.2rem'}} className="bi bi-gear"></i>
+                CONFIGURACION
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown" style={{color:"white"}}>
-                <li><a className="dropdown-item" href="#">Acción</a></li>
-                <li><a className="dropdown-item" href="#">Drama</a></li>
+                <li><a className="dropdown-item" href="/directors">Directores</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Ciencia ficción</a></li>
+                <li><a className="dropdown-item" href="#">Generos</a><span ></span></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="#">Productoras</a></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="#">Tipos</a></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="#">peliculas y Series</a></li>
               </ul>
             </li>
             
@@ -55,8 +70,9 @@ const Navbar = () => {
               placeholder="Buscar películas"
               aria-label="Search"
             />
+            
             <button className={`btn ${styles.btnSearch}`} type="submit">
-              Buscar
+            <i style={{fontSize: '1.2rem'}} className="bi bi-search"></i>
             </button>
           </form>
         </div>

@@ -1,4 +1,10 @@
 .moviesContainer {
-    min-height: 80vh; /* Altura mínima para cubrir la pantalla */
-    background-color: #f8f9fa; /* Fondo gris claro */
+    min-height: 70vh; /* Altura mínima para cubrir la pantalla */
+    background-color: #2f3031; /* Fondo gris claro */
+    color: white; /* Texto blanco */
+    padding: 2rem; /* Margen interior */
+    display: flex; /* Flexbox */
+    flex-direction: column; /* Columna */
+    align-items: center; /* Centrado horizontal */
+
   }

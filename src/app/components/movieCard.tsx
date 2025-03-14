@@ -1,29 +1,53 @@
 import React from 'react';
-import styles from './MovieCard.module.css'; // Opcional, para estilos personalizados
+import styles from './MovieCard.module.css';
 
-// Definimos el tipo de las props basado en tu JSON
-type MovieCardProps  = {
+type MovieCardProps = {
   title: string;
   synopsis: string;
   releaseYear: number;
-  image?: string; // Opcional, usaremos un placeholder si no llega
+  image?: string;
 };
 
 const MovieCard = ({ title, synopsis, releaseYear, image }: MovieCardProps) => {
-  // Placeholder para la imagen si no se proporciona
   const defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTNcPVbPV6fHpXYC8TekdMX_5aK8GunG_KkA&s';
 
   return (
-    <div className="card" style={{ width: '13rem', margin: '10px' }}>
+    <div
+      className="card"
+      style={{
+        width: '15rem', // Más ancha
+        maxHeight: '400px', // Límite de altura
+        margin: '16px',
+        boxShadow: '0 0 10px rgba(180, 177, 177, 0.82)',
+        overflow: 'hidden', // Evita que el contenido desborde
+      }}
+    >
       <img
         src={image || defaultImage}
         className="card-img-top"
         alt={title}
-        style={{ objectFit: 'cover' }}
+        style={{
+          objectFit: 'cover',
+          height: '300px', // Altura fija para la imagen
+          width: '100%', // Ocupa todo el ancho
+        }}
       />
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{synopsis}</p>
+      <div className="card-body" style={{ padding: '10px' }}>
+        <h5 className="card-title" style={{ marginBottom: '5px' }}>{title}</h5>
+        <p
+          className="card-text"
+          style={{
+            marginBottom: '5px',
+            maxHeight: '60px', // Limita el espacio para la sinopsis
+            overflow: 'hidden',
+            textOverflow: 'ellipsis', // Agrega "..." si el texto se corta
+            display: '-webkit-box',
+            WebkitLineClamp: 2, // Limita a 2 líneas
+            WebkitBoxOrient: 'vertical',
+          }}
+        >
+          {synopsis}
+        </p>
         <p className="card-text">
           <small className="text-muted">Año: {releaseYear}</small>
         </p>
