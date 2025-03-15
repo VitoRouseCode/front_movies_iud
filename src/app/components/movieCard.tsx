@@ -18,7 +18,7 @@ const MovieCard = ({ title, synopsis, releaseYear, image }: MovieCardProps) => {
         width: '15rem', // Más ancha
         maxHeight: '400px', // Límite de altura
         margin: '16px',
-        boxShadow: '0 0 10px rgba(180, 177, 177, 0.82)',
+        boxShadow: '0 0 10pxrgb(93, 102, 137)',
         overflow: 'hidden', // Evita que el contenido desborde
       }}
     >
@@ -31,8 +31,9 @@ const MovieCard = ({ title, synopsis, releaseYear, image }: MovieCardProps) => {
           height: '300px', // Altura fija para la imagen
           width: '100%', // Ocupa todo el ancho
         }}
+        
       />
-      <div className="card-body" style={{ padding: '10px' }}>
+      <div className="card-body text-white" style={{ padding: '10px', backgroundColor:'#2D334A' }}>
         <h5 className="card-title" style={{ marginBottom: '5px' }}>{title}</h5>
         <p
           className="card-text"
@@ -48,8 +49,8 @@ const MovieCard = ({ title, synopsis, releaseYear, image }: MovieCardProps) => {
         >
           {synopsis}
         </p>
-        <p className="card-text">
-          <small className="text-muted">Año: {releaseYear}</small>
+        <p className="card-text ">
+          <small className=" text-white">Año: {releaseYear}</small>
         </p>
       </div>
     </div>

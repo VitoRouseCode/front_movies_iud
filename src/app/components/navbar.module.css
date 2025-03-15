@@ -1,23 +1,23 @@
 .navbarCustom {
-  background-color: #000000; /* Negro puro */
+  background-color: #2f2f2f !important; /* Negro puro */
 }
 
 .navbarCustom .navbar-brand,
 .navbarCustom .nav-link {
-  color: #ffffff; /* Blanco puro */
+  color: #ffffff; /* Blanco puro para enlaces y marca */
 }
 
 .navbarCustom .nav-link:hover,
 .navbarCustom .navbar-brand:hover {
-  color: #d3d3d3; /* Gris claro para hover, sutil contraste */
+  color: #d3d3d3; /* Gris claro para hover */
 }
 
 .navbarCustom .dropdown-menu {
-  background-color: #000000; /* Fondo negro para el dropdown */
+  background-color: #000000; /* Fondo negro para dropdown */
 }
 
 .navbarCustom .dropdown-item {
-  color: #ffffff; /* Texto blanco en el dropdown */
+  color: #ffffff; /* Blanco para ítems del dropdown */
 }
 
 .navbarCustom .dropdown-item:hover {
@@ -26,13 +26,22 @@
 }
 
 .navbarCustom .btnSearch {
-  background-color: #000000; /* Negro para el botón de búsqueda */
-  border-color: #ffffff; /* Borde blanco para destacar */
-  color: #ffffff; /* Texto blanco */
+  background-color: #000000; /* Negro para botón de búsqueda */
+  border-color: #ffffff; /* Borde blanco */
+  color: #ffffff; /* Ícono blanco */
 }
 
 .navbarCustom .btnSearch:hover {
   background-color: #333333; /* Gris oscuro para hover */
   border-color: #d3d3d3; /* Borde gris claro en hover */
-  color: #ffffff; /* Texto blanco */
+  color: #ffffff; /* Ícono blanco */
+}
+
+/* Asegurar que el toggler sea visible en negro */
+.navbarCustom .navbar-toggler {
+  border-color: #ffffff; /* Borde blanco para el toggler */
+}
+
+.navbarCustom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* Ícono blanco */
 }

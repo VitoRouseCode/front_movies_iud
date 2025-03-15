@@ -9,11 +9,12 @@ const Navbar = () => {
     import('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
 
-  
   return (
-    <nav className={`navbar navbar-expand-lg ${styles.navbarCustom}`}>
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/"><Image alt='' src={image} width={130}></Image></a>
+    <nav style={{backgroundColor:"#1A1F2E"}}  className={`navbar navbar-expand-lg `}>
+      <div className="container-fluid ">
+        <a className="navbar-brand" href="/">
+          <Image priority={true} alt="Logo de películas" src={image} width={130} height={50} />
+        </a>
         <button
           className="navbar-toggler"
           type="button"
@@ -25,43 +26,41 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse " id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" 
-              style={{color:"white"}} href="/"><i style={{marginLeft:'15px',marginRight:'5px', fontSize: '1.2rem'}} 
-              className="bi bi-house"></i>INICIO</a>
+              <a className="nav-link text-white p-3 text-center" aria-current="page" href="/">
+                <i className="bi bi-house me-1 " style={{ fontSize: '1.2rem' }}></i> INICIO
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" style={{color:"white"}} href="/movies"><i 
-              style={{marginLeft:'15px',marginRight:'5px',fontSize: '1.2rem'}} 
-              className="bi bi-film"></i>PELICULAS</a>
+              <a className="nav-link text-white p-3 text-center" href="/movies">
+                <i className="bi bi-film me-1" style={{ fontSize: '1.2rem' }}></i> PELÍCULAS
+              </a>
             </li>
-            <li className="nav-item dropdown" style={{color:"white"}}>
+            <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle text-white p-3 text-center"
                 href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                style={{color:"white"}}
-              ><i style={{marginLeft:'15px',marginRight:'5px',fontSize: '1.2rem'}} className="bi bi-gear"></i>
-                CONFIGURACION
+              >
+                <i className="bi bi-gear me-1" style={{ fontSize: '1.2rem' }}></i> CONFIGURACIÓN
               </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown" style={{color:"white"}}>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a className="dropdown-item" href="/directors">Directores</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Generos</a><span ></span></li>
+                <li><a className="dropdown-item" href="#">Géneros</a></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><a className="dropdown-item" href="#">Productoras</a></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><a className="dropdown-item" href="#">Tipos</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">peliculas y Series</a></li>
+                <li><a className="dropdown-item" href="#">Películas y Series</a></li>
               </ul>
             </li>
-            
           </ul>
           <form className="d-flex">
             <input
@@ -70,9 +69,8 @@ const Navbar = () => {
               placeholder="Buscar películas"
               aria-label="Search"
             />
-            
             <button className={`btn ${styles.btnSearch}`} type="submit">
-            <i style={{fontSize: '1.2rem'}} className="bi bi-search"></i>
+              <i className="bi bi-search text-white" style={{ fontSize: '1.2rem' }}></i>
             </button>
           </form>
         </div>
