@@ -15,8 +15,7 @@ const DirectorsPage = () => {
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({ names: '', status: 'Activo' });
   const [editId, setEditId] = useState(null);
-
-  const [showModal, setShowModal] = useState(false); // Estado para el modal
+  const [showModal, setShowModal] = useState(false);
 
   const fetchDirectors = async () => {
     try {
@@ -45,7 +44,7 @@ const DirectorsPage = () => {
       if (editId) {
         await updateDirector(editId, formData);
         setEditId(null);
-        setShowModal(false); // Cerrar modal tras actualizar
+        setShowModal(false);
       } else {
         await createDirector(formData);
       }
@@ -61,7 +60,7 @@ const DirectorsPage = () => {
   const handleEdit = (director) => {
     setFormData({ names: director.names, status: director.status });
     setEditId(director._id);
-    setShowModal(true); // Abrir modal
+    setShowModal(true);
   };
 
   const handleDelete = async (id) => {
@@ -95,158 +94,160 @@ const DirectorsPage = () => {
   if (error) return <div className={styles.directorsContainer}>{error}</div>;
 
   return (
-    <div className={styles.directorsContainer}>
-      <h1 className="mb-4 text-center">Gestión de Directores</h1>
+    <div className="container">
+      <div className={styles.directorsContainer}>
+        <h1 className="mb-4 text-center">Gestión de Directores</h1>
 
-      {/* Formulario de creación */}
-      <form onSubmit={handleSubmit} className="mb-5">
-        <div className="row g-3">
-          <div className="col-md-6">
-            <label htmlFor="names" className="form-label">
-              Nombres
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="names"
-              name="names"
-              value={formData.names}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="col-md-4">
-            <label htmlFor="status" className="form-label">
-              Estado
-            </label>
-            <select
-              className="form-select"
-              id="status"
-              name="status"
-              value={formData.status}
-              onChange={handleInputChange}
-            >
-              <option value="Activo">Activo</option>
-              <option value="Inactivo">Inactivo</option>
-            </select>
-          </div>
-          <div className="col-md-2 d-flex align-items-end">
-            <button type="submit" className="btn btn-primary w-100">
-              Crear
-            </button>
-          </div>
-        </div>
-      </form>
-
-      {/* Lista de directores */}
-      <div className="table-responsive">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Nombres</th>
-              <th>Estado</th>
-              <th>Creado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {directors.length > 0 ? (
-              directors.map((director) => (
-                <tr key={director._id}>
-                  <td>{director.names}</td>
-                  <td>{director.status}</td>
-                  <td>
-                    {director.createdAt
-                      ? new Date(director.createdAt).toLocaleDateString()
-                      : 'Sin fecha'}
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-sm btn-warning me-2"
-                      onClick={() => handleEdit(director)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="btn btn-sm btn-danger"
-                      onClick={() => handleDelete(director._id)}
-                    >
-                      Eliminar
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td className="text-center">No hay directores disponibles</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Modal para edición */}
-      {showModal && (
-        <div className="modal fade show d-block"  style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Editar Director</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowModal(false)}
-                ></button>
-              </div>
-              <form onSubmit={handleSubmit}>
-                <div className="modal-body">
-                  <div className="mb-3">
-                    <label htmlFor="editNames" className="form-label">
-                      Nombres
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="editNames"
-                      name="names"
-                      value={formData.names}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="editStatus" className="form-label">
-                      Estado
-                    </label>
-                    <select
-                      className="form-select"
-                      id="editStatus"
-                      name="status"
-                      value={formData.status}
-                      onChange={handleInputChange}
-                    >
-                      <option value="Activo">Activo</option>
-                      <option value="Inactivo">Inactivo</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Cancelar
-                  </button>
-                  <button type="submit" className="btn btn-primary">
-                    Actualizar
-                  </button>
-                </div>
-              </form>
+        {/* Formulario de creación */}
+        <form onSubmit={handleSubmit} className="mb-5">
+          <div className="row g-3">
+            <div className="col-md-6">
+              <label htmlFor="names" className={`form-label ${styles.formLabel}`}>
+                Nombres
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="names"
+                name="names"
+                value={formData.names}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="status" className={`form-label ${styles.formLabel}`}>
+                Estado
+              </label>
+              <select
+                className="form-select"
+                id="status"
+                name="status"
+                value={formData.status}
+                onChange={handleInputChange}
+              >
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+            </div>
+            <div className="col-md-2 d-flex align-items-end">
+              <button type="submit" className="btn btn-primary w-100">
+                Crear
+              </button>
             </div>
           </div>
+        </form>
+
+        {/* Lista de directores */}
+        <div className="table-responsive">
+          <table className={`table table-striped ${styles.table}`}>
+            <thead>
+              <tr>
+                <th>Nombres</th>
+                <th>Estado</th>
+                <th>Creado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {directors.length > 0 ? (
+                directors.map((director) => (
+                  <tr key={director._id}>
+                    <td>{director.names}</td>
+                    <td>{director.status}</td>
+                    <td>
+                      {director.createdAt
+                        ? new Date(director.createdAt).toLocaleDateString()
+                        : 'Sin fecha'}
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-sm btn-warning me-2"
+                        onClick={() => handleEdit(director)}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={() => handleDelete(director._id)}
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4} className="text-center">No hay directores disponibles</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      )}
+
+        {/* Modal para edición */}
+        {showModal && (
+          <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+            <div className="modal-dialog">
+              <div className={`modal-content ${styles.modalContent}`}>
+                <div className={`modal-header ${styles.modalHeader}`}>
+                  <h5 className={`modal-title ${styles.modalTitle}`}>Editar Director</h5>
+                  <button
+                    type="button"
+                    className={`btn-close ${styles.btnClose}`}
+                    onClick={() => setShowModal(false)}
+                  ></button>
+                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className="modal-body">
+                    <div className="mb-3">
+                      <label htmlFor="editNames" className={`form-label ${styles.formLabel}`}>
+                        Nombres
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="editNames"
+                        name="names"
+                        value={formData.names}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="editStatus" className={`form-label ${styles.formLabel}`}>
+                        Estado
+                      </label>
+                      <select
+                        className="form-select"
+                        id="editStatus"
+                        name="status"
+                        value={formData.status}
+                        onChange={handleInputChange}
+                      >
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className={`modal-footer ${styles.modalFooter}`}>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => setShowModal(false)}
+                    >
+                      Cancelar
+                    </button>
+                    <button type="submit" className="btn btn-primary">
+                      Actualizar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

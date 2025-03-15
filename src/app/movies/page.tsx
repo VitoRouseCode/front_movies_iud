@@ -1,16 +1,19 @@
-'use client';
+
 import React, { useEffect } from 'react';
-import { useState } from 'react';
+/* import { useState } from 'react'; */
 import styles from './movies.module.css';
 import getMovies from '../../../services/getMovies';
 import MovieCard from '../components/movieCard';
 
-const MoviesPage = () => {
-  const [allmovies, setAllmovies] = useState([]);
+const MoviesPage = async() => {
+ /*  const [allmovies, setAllmovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); */
 
-  useEffect(() => {
+const allmovies = await getMovies();
+/* setAllmovies(movies); */
+
+/*   useEffect(() => {
     const fetchMovies = async () => {
       try {
         console.log('Iniciando petición a la API...');
@@ -25,8 +28,8 @@ const MoviesPage = () => {
       }
     };
     fetchMovies();
-  }, []);
-
+  }, []); */
+/* 
   if (loading) {
     return <div className={styles.moviesContainer}>Cargando películas...</div>;
   }
@@ -37,11 +40,11 @@ const MoviesPage = () => {
 
   if (!allmovies || allmovies.length === 0) {
     return <div className={styles.moviesContainer}>No hay películas disponibles</div>;
-  }
+  } */
 
   return (
     <div className={styles.moviesContainer}>
-      <h1 className="mb-4">Películas</h1>
+      <h1 className="mb-4 text-white">Películas</h1>
       <div style={{ display: 'flex', flexWrap: 'wrap', padding: '10px' }}>
         {allmovies.map((movie, index) => (
           <MovieCard
