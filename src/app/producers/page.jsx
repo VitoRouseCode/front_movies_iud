@@ -1,35 +1,41 @@
+// app/producers/page.jsx
 'use client';
 import React, { useState, useEffect } from 'react';
-import styles from './directors.module.css';
+import styles from './producers.module.css'; // Archivo CSS específico
 import {
-  getDirectors,
-  createDirector,
-  updateDirector,
-  deleteDirector,
-} from '../../../services/directors';
+  getProducers,
+  createProducer,
+  updateProducer,
+  deleteProducer,
+} from '../../../services/producers'; // Importamos los servicios
 import Swal from 'sweetalert2';
 
-const DirectorsPage = () => {
-  const [directors, setDirectors] = useState([]);
+const ProducersPage = () => {
+  const [producers, setProducers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({ names: '', status: 'Activo' });
+  const [formData, setFormData] = useState({
+    name: '',
+    slogan: '',
+    description: '',
+    status: 'Activo',
+  });
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const fetchDirectors = async () => {
+  const fetchProducers = async () => {
     try {
-      const data = await getDirectors();
-      setDirectors(data);
+      const data = await getProducers();
+      setProducers(data);
     } catch (err) {
-      setError('No se pudieron cargar los directores');
+      setError('No se pudieron cargar las productoras');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchDirectors();
+    fetchProducers();
   }, []);
 
   const handleInputChange = (e) => {
@@ -42,30 +48,37 @@ const DirectorsPage = () => {
     setLoading(true);
     try {
       if (editId) {
-        await updateDirector(editId, formData);
+        await updateProducer(editId, formData);
         setEditId(null);
         setShowModal(false);
       } else {
-        await createDirector(formData);
+        await createProducer(formData);
       }
-      setFormData({ names: '', status: 'Activo' });
-      await fetchDirectors();
+      setFormData({ name: '', slogan: '', description: '', status: 'Activo' });
+      await fetchProducers();
+      Swal.fire('¡Éxito!', 'Productora guardada correctamente.', 'success');
     } catch (err) {
-      setError('Error al guardar el director');
+      setError('Error al guardar la productora');
+      Swal.fire('Error', 'No se pudo guardar la productora.', 'error');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleEdit = (director) => {
-    setFormData({ names: director.names, status: director.status });
-    setEditId(director._id);
+  const handleEdit = (producer) => {
+    setFormData({
+      name: producer.name,
+      slogan: producer.slogan || '',
+      description: producer.description || '',
+      status: producer.status,
+    });
+    setEditId(producer._id);
     setShowModal(true);
   };
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
-      title: '¿Seguro que desea eliminar este director?',
+      title: '¿Seguro que desea eliminar esta productora?',
       text: 'Esta acción no se puede deshacer',
       icon: 'warning',
       showCancelButton: true,
@@ -78,44 +91,70 @@ const DirectorsPage = () => {
     if (result.isConfirmed) {
       setLoading(true);
       try {
-        await deleteDirector(id);
-        await fetchDirectors();
-        Swal.fire('¡Eliminado!', 'El director ha sido eliminado.', 'success');
+        await deleteProducer(id);
+        await fetchProducers();
+        Swal.fire('¡Eliminado!', 'La productora ha sido eliminada.', 'success');
       } catch (err) {
-        setError('Error al eliminar el director');
-        Swal.fire('Error', 'No se pudo eliminar el director.', 'error');
+        setError('Error al eliminar la productora');
+        Swal.fire('Error', 'No se pudo eliminar la productora.', 'error');
       } finally {
         setLoading(false);
       }
     }
   };
 
-  if (loading) return <div className={styles.directorsContainer}>Cargando...</div>;
-  if (error) return <div className={styles.directorsContainer}>{error}</div>;
+  if (loading) return <div className={styles.producersContainer}>Cargando...</div>;
+  if (error) return <div className={styles.producersContainer}>{error}</div>;
 
   return (
     <div className="container">
-      <div className={styles.directorsContainer}>
-        <h1 className="mb-4 text-center">Gestión de Directores</h1>
+      <div className={styles.producersContainer}>
+        <h1 className="mb-4 text-center">Gestión de Productoras</h1>
 
         {/* Formulario de creación */}
         <form onSubmit={handleSubmit} className="mb-5">
           <div className="row g-3">
-            <div className="col-md-6">
-              <label htmlFor="names" className={`form-label ${styles.formLabel}`}>
-                Nombres
+            <div className="col-md-3">
+              <label htmlFor="name" className={`form-label ${styles.formLabel}`}>
+                Nombre
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="names"
-                name="names"
-                value={formData.names}
+                id="name"
+                name="name"
+                value={formData.name}
                 onChange={handleInputChange}
                 required
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
+              <label htmlFor="slogan" className={`form-label ${styles.formLabel}`}>
+                Slogan
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="slogan"
+                name="slogan"
+                value={formData.slogan}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="col-md-3">
+              <label htmlFor="description" className={`form-label ${styles.formLabel}`}>
+                Descripción
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="col-md-2">
               <label htmlFor="status" className={`form-label ${styles.formLabel}`}>
                 Estado
               </label>
@@ -130,40 +169,44 @@ const DirectorsPage = () => {
                 <option value="Inactivo">Inactivo</option>
               </select>
             </div>
-            <div className="col-md-2 d-flex align-items-end">
+            <div className="col-md-1 d-flex align-items-end">
               <button type="submit" className="btn btn-primary w-100">
-                Crear
+                {editId ? 'Actualizar' : 'Crear'}
               </button>
             </div>
           </div>
         </form>
 
-        {/* Lista de directores */}
+        {/* Lista de productoras */}
         <div className="table-responsive">
           <table className={`table table-striped ${styles.table}`}>
             <thead>
               <tr>
-                <th>Nombres</th>
+                <th>Nombre</th>
+                <th>Slogan</th>
+                <th>Descripción</th>
                 <th>Estado</th>
                 <th>Creado</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {directors.length > 0 ? (
-                directors.map((director) => (
-                  <tr key={director._id}>
-                    <td>{director.names}</td>
-                    <td>{director.status}</td>
+              {producers.length > 0 ? (
+                producers.map((producer) => (
+                  <tr key={producer._id}>
+                    <td>{producer.name}</td>
+                    <td>{producer.slogan || 'Sin slogan'}</td>
+                    <td>{producer.description || 'Sin descripción'}</td>
+                    <td>{producer.status}</td>
                     <td>
-                      {director.createdAt
-                        ? new Date(director.createdAt).toLocaleDateString()
+                      {producer.createdAt
+                        ? new Date(producer.createdAt).toLocaleDateString()
                         : 'Sin fecha'}
                     </td>
                     <td>
                       <button
                         className="btn btn-sm btn-warning me-2"
-                        onClick={() => handleEdit(director)}
+                        onClick={() => handleEdit(producer)}
                         data-bs-toggle="tooltip"
                         title="Editar"
                       >
@@ -171,18 +214,20 @@ const DirectorsPage = () => {
                       </button>
                       <button
                         className="btn btn-sm btn-danger"
-                        onClick={() => handleDelete(director._id)}
+                        onClick={() => handleDelete(producer._id)}
                         data-bs-toggle="tooltip"
                         title="Eliminar"
                       >
-                      <i className="bi bi-trash"></i>
+                        <i className="bi bi-trash"></i>
                       </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={4} className="text-center">No hay directores disponibles</td>
+                  <td colSpan={6} className="text-center">
+                    No hay productoras disponibles
+                  </td>
                 </tr>
               )}
             </tbody>
@@ -195,7 +240,7 @@ const DirectorsPage = () => {
             <div className="modal-dialog">
               <div className={`modal-content ${styles.modalContent}`}>
                 <div className={`modal-header ${styles.modalHeader}`}>
-                  <h5 className={`modal-title ${styles.modalTitle}`}>Editar Director</h5>
+                  <h5 className={`modal-title ${styles.modalTitle}`}>Editar Productora</h5>
                   <button
                     type="button"
                     className={`btn-close ${styles.btnClose}`}
@@ -205,17 +250,43 @@ const DirectorsPage = () => {
                 <form onSubmit={handleSubmit}>
                   <div className="modal-body">
                     <div className="mb-3">
-                      <label htmlFor="editNames" className={`form-label ${styles.formLabel}`}>
-                        Nombres
+                      <label htmlFor="editName" className={`form-label ${styles.formLabel}`}>
+                        Nombre
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        id="editNames"
-                        name="names"
-                        value={formData.names}
+                        id="editName"
+                        name="name"
+                        value={formData.name}
                         onChange={handleInputChange}
                         required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="editSlogan" className={`form-label ${styles.formLabel}`}>
+                        Slogan
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="editSlogan"
+                        name="slogan"
+                        value={formData.slogan}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="editDescription" className={`form-label ${styles.formLabel}`}>
+                        Descripción
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="editDescription"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleInputChange}
                       />
                     </div>
                     <div className="mb-3">
@@ -256,4 +327,4 @@ const DirectorsPage = () => {
   );
 };
 
-export default DirectorsPage;
+export default ProducersPage;

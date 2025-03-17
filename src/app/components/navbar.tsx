@@ -52,13 +52,13 @@ const Navbar = () => {
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a className="dropdown-item" href="/directors">Directores</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Géneros</a></li>
+                <li><a className="dropdown-item" href="/genre">Géneros</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Productoras</a></li>
+                <li><a className="dropdown-item" href="/producers">Productoras</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Tipos</a></li>
+                <li><a className="dropdown-item" href="/types">Tipos</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Películas y Series</a></li>
+                <li><a className="dropdown-item" href="/media">Películas y Series</a></li>
               </ul>
             </li>
           </ul>

@@ -1,0 +1,57 @@
+/* genres.module.css */
+.genresContainer {
+    min-height: 75vh; /* Mantener altura mínima */
+    padding: 2rem; /* Mantener padding interno */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Ajustar estilos del formulario */
+  .formLabel {
+    color: #FFFFFF; /* Texto blanco para etiquetas */
+  }
+  
+  /* Ajustar estilos de la tabla */
+  .table {
+    background-color: transparent; /* Fondo transparente para integrarse con el gradiente */
+    color: #FFFFFF; /* Texto blanco */
+  }
+  
+  .table th,
+  .table td {
+    border-color: #3A4066; /* Bordes más oscuros para contraste */
+  }
+  
+  .table thead th {
+    background-color: #2D334A; /* Fondo más oscuro para la cabecera */
+    color: #FFFFFF;
+  }
+  
+  .table tbody tr {
+    background-color: #2D334A; /* Fondo de filas */
+  }
+  
+  .table tbody tr:hover {
+    background-color: #3A4066; /* Hover más claro */
+  }
+  
+  /* Ajustar el modal */
+  .modalContent {
+    background-color: #2D334A; /* Fondo oscuro para el modal */
+    color: #FFFFFF;
+  }
+  
+  .modalHeader,
+  .modalFooter {
+    background-color: #1A1F2E; /* Fondo más oscuro para header y footer del modal */
+    border-color: #3A4066;
+  }
+  
+  .modalTitle,
+  .formLabel {
+    color: #FFFFFF;
+  }
+  
+  .btnClose {
+    filter: invert(1); /* Invertir color para que el botón de cerrar sea visible */
+  }

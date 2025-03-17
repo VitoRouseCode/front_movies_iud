@@ -1,6 +1,6 @@
 /* directors.module.css */
 .directorsContainer {
-  min-height: 70vh; /* Mantener altura mínima */
+  min-height: 75vh; /* Mantener altura mínima */
   padding: 2rem; /* Mantener padding interno */
   display: flex;
   flex-direction: column;

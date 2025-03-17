@@ -1,5 +1,5 @@
 .moviesContainer {
-    min-height: 70vh; /* Altura mínima para cubrir la pantalla */
+    min-height: 75vh; /* Altura mínima para cubrir la pantalla */
     background: linear-gradient(to bottom, #1A1F2E, #3A4066);
     padding: 2rem; /* Margen interior */
     display: flex; /* Flexbox */

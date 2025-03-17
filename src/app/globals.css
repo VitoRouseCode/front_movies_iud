@@ -1,20 +1,25 @@
 /* globals.css */
 body {
-  background: linear-gradient(to bottom, #1A1F2E, #3A4066); /* Gradiente global */
+  background: linear-gradient(to bottom, #1A1F2E, #3A4066);
   color: #FFFFFF;
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  min-height: 100vh; /* Asegura que ocupe toda la altura */
+  min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
   display: flex;
   flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto; /* Permite que el main ocupe el espacio disponible y no afecte al footer */
+  overflow-y: auto; /* Añade scroll vertical si el contenido desborda */
+  padding: 20px; /* Espaciado interno */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  flex: 1; /* Permite que el contenido crezca y deje espacio para el footer */
+  padding: 0 15px; /* Ajuste para pantallas pequeñas */
 }
 
 .section {
@@ -46,13 +51,13 @@ a:hover {
   background-color: #4A5470;
 }
 
-/* Footer global (opcional, para consistencia) */
 .footer {
   background-color: #1A1F2E;
   color: #FFFFFF;
   padding: 20px 0;
   text-align: center;
   border-top: 1px solid #3A4066;
+  flex-shrink: 0; /* Evita que el footer se comprima */
 }
 
 .footer a {

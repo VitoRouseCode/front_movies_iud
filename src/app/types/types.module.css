@@ -1,0 +1,54 @@
+/* types.module.css */
+.typesContainer {
+    min-height: 75vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formLabel {
+    color: #ffffff;
+  }
+  
+  .table {
+    background-color: transparent;
+    color: #ffffff;
+  }
+  
+  .table th,
+  .table td {
+    border-color: #3a4066;
+  }
+  
+  .table thead th {
+    background-color: #2d334a;
+    color: #ffffff;
+  }
+  
+  .table tbody tr {
+    background-color: #2d334a;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #3a4066;
+  }
+  
+  .modalContent {
+    background-color: #2d334a;
+    color: #ffffff;
+  }
+  
+  .modalHeader,
+  .modalFooter {
+    background-color: #1a1f2e;
+    border-color: #3a4066;
+  }
+  
+  .modalTitle,
+  .formLabel {
+    color: #ffffff;
+  }
+  
+  .btnClose {
+    filter: invert(1);
+  }

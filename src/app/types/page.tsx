@@ -1,35 +1,31 @@
+// app/types/page.jsx
 'use client';
 import React, { useState, useEffect } from 'react';
-import styles from './directors.module.css';
-import {
-  getDirectors,
-  createDirector,
-  updateDirector,
-  deleteDirector,
-} from '../../../services/directors';
+import styles from './types.module.css';
+import { getTypes, createType, updateType, deleteType } from '../../../services/types';
 import Swal from 'sweetalert2';
 
-const DirectorsPage = () => {
-  const [directors, setDirectors] = useState([]);
+const TypesPage = () => {
+  const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({ names: '', status: 'Activo' });
+  const [formData, setFormData] = useState({ name: '', description: '' });
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const fetchDirectors = async () => {
+  const fetchTypes = async () => {
     try {
-      const data = await getDirectors();
-      setDirectors(data);
+      const data = await getTypes();
+      setTypes(data);
     } catch (err) {
-      setError('No se pudieron cargar los directores');
+      setError('No se pudieron cargar los tipos');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchDirectors();
+    fetchTypes();
   }, []);
 
   const handleInputChange = (e) => {
@@ -42,30 +38,32 @@ const DirectorsPage = () => {
     setLoading(true);
     try {
       if (editId) {
-        await updateDirector(editId, formData);
+        await updateType(editId, formData);
         setEditId(null);
         setShowModal(false);
       } else {
-        await createDirector(formData);
+        await createType(formData);
       }
-      setFormData({ names: '', status: 'Activo' });
-      await fetchDirectors();
+      setFormData({ name: '', description: '' });
+      await fetchTypes();
+      Swal.fire('¡Éxito!', 'Tipo guardado correctamente.', 'success');
     } catch (err) {
-      setError('Error al guardar el director');
+      setError('Error al guardar el tipo');
+      Swal.fire('Error', 'No se pudo guardar el tipo.', 'error');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleEdit = (director) => {
-    setFormData({ names: director.names, status: director.status });
-    setEditId(director._id);
+  const handleEdit = (type) => {
+    setFormData({ name: type.name, description: type.description || '' });
+    setEditId(type._id);
     setShowModal(true);
   };
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
-      title: '¿Seguro que desea eliminar este director?',
+      title: '¿Seguro que desea eliminar este tipo?',
       text: 'Esta acción no se puede deshacer',
       icon: 'warning',
       showCancelButton: true,
@@ -78,92 +76,90 @@ const DirectorsPage = () => {
     if (result.isConfirmed) {
       setLoading(true);
       try {
-        await deleteDirector(id);
-        await fetchDirectors();
-        Swal.fire('¡Eliminado!', 'El director ha sido eliminado.', 'success');
+        await deleteType(id);
+        await fetchTypes();
+        Swal.fire('¡Eliminado!', 'El tipo ha sido eliminado.', 'success');
       } catch (err) {
-        setError('Error al eliminar el director');
-        Swal.fire('Error', 'No se pudo eliminar el director.', 'error');
+        setError('Error al eliminar el tipo');
+        Swal.fire('Error', 'No se pudo eliminar el tipo.', 'error');
       } finally {
         setLoading(false);
       }
     }
   };
 
-  if (loading) return <div className={styles.directorsContainer}>Cargando...</div>;
-  if (error) return <div className={styles.directorsContainer}>{error}</div>;
+  if (loading) return <div className={styles.typesContainer}>Cargando...</div>;
+  if (error) return <div className={styles.typesContainer}>{error}</div>;
 
   return (
     <div className="container">
-      <div className={styles.directorsContainer}>
-        <h1 className="mb-4 text-center">Gestión de Directores</h1>
+      <div className={styles.typesContainer}>
+        <h1 className="mb-4 text-center">Gestión de Tipos de Contenido</h1>
 
         {/* Formulario de creación */}
         <form onSubmit={handleSubmit} className="mb-5">
           <div className="row g-3">
-            <div className="col-md-6">
-              <label htmlFor="names" className={`form-label ${styles.formLabel}`}>
-                Nombres
+            <div className="col-md-4">
+              <label htmlFor="name" className={`form-label ${styles.formLabel}`}>
+                Nombre
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="names"
-                name="names"
-                value={formData.names}
+                id="name"
+                name="name"
+                value={formData.name}
                 onChange={handleInputChange}
                 required
               />
             </div>
-            <div className="col-md-4">
-              <label htmlFor="status" className={`form-label ${styles.formLabel}`}>
-                Estado
+            <div className="col-md-6">
+              <label htmlFor="description" className={`form-label ${styles.formLabel}`}>
+                Descripción
               </label>
-              <select
-                className="form-select"
-                id="status"
-                name="status"
-                value={formData.status}
+              <input
+                type="text"
+                className="form-control"
+                id="description"
+                name="description"
+                value={formData.description}
                 onChange={handleInputChange}
-              >
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-              </select>
+              />
             </div>
             <div className="col-md-2 d-flex align-items-end">
               <button type="submit" className="btn btn-primary w-100">
-                Crear
+                {editId ? 'Actualizar' : 'Crear'}
               </button>
             </div>
           </div>
         </form>
 
-        {/* Lista de directores */}
+        {/* Lista de tipos */}
         <div className="table-responsive">
           <table className={`table table-striped ${styles.table}`}>
             <thead>
               <tr>
-                <th>Nombres</th>
-                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
                 <th>Creado</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {directors.length > 0 ? (
-                directors.map((director) => (
-                  <tr key={director._id}>
-                    <td>{director.names}</td>
-                    <td>{director.status}</td>
+              {types.length > 0 ? (
+                types.map((type) => (
+                  <tr key={type._id}>
+                    <td>{type.name}</td>
+                    <td>{type.description || 'Sin descripción'}</td>
                     <td>
-                      {director.createdAt
-                        ? new Date(director.createdAt).toLocaleDateString()
+                      {type.createdAt
+                        ? new Date(type.createdAt).toLocaleDateString()
                         : 'Sin fecha'}
                     </td>
                     <td>
                       <button
                         className="btn btn-sm btn-warning me-2"
-                        onClick={() => handleEdit(director)}
+                        onClick={() => handleEdit(type)}
                         data-bs-toggle="tooltip"
                         title="Editar"
                       >
@@ -171,18 +167,20 @@ const DirectorsPage = () => {
                       </button>
                       <button
                         className="btn btn-sm btn-danger"
-                        onClick={() => handleDelete(director._id)}
+                        onClick={() => handleDelete(type._id)}
                         data-bs-toggle="tooltip"
                         title="Eliminar"
                       >
-                      <i className="bi bi-trash"></i>
+                        <i className="bi bi-trash"></i>
                       </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={4} className="text-center">No hay directores disponibles</td>
+                  <td colSpan={4} className="text-center">
+                    No hay tipos disponibles
+                  </td>
                 </tr>
               )}
             </tbody>
@@ -195,7 +193,7 @@ const DirectorsPage = () => {
             <div className="modal-dialog">
               <div className={`modal-content ${styles.modalContent}`}>
                 <div className={`modal-header ${styles.modalHeader}`}>
-                  <h5 className={`modal-title ${styles.modalTitle}`}>Editar Director</h5>
+                  <h5 className={`modal-title ${styles.modalTitle}`}>Editar Tipo</h5>
                   <button
                     type="button"
                     className={`btn-close ${styles.btnClose}`}
@@ -205,33 +203,31 @@ const DirectorsPage = () => {
                 <form onSubmit={handleSubmit}>
                   <div className="modal-body">
                     <div className="mb-3">
-                      <label htmlFor="editNames" className={`form-label ${styles.formLabel}`}>
-                        Nombres
+                      <label htmlFor="editName" className={`form-label ${styles.formLabel}`}>
+                        Nombre
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        id="editNames"
-                        name="names"
-                        value={formData.names}
+                        id="editName"
+                        name="name"
+                        value={formData.name}
                         onChange={handleInputChange}
                         required
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="editStatus" className={`form-label ${styles.formLabel}`}>
-                        Estado
+                      <label htmlFor="editDescription" className={`form-label ${styles.formLabel}`}>
+                        Descripción
                       </label>
-                      <select
-                        className="form-select"
-                        id="editStatus"
-                        name="status"
-                        value={formData.status}
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="editDescription"
+                        name="description"
+                        value={formData.description}
                         onChange={handleInputChange}
-                      >
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo">Inactivo</option>
-                      </select>
+                      />
                     </div>
                   </div>
                   <div className={`modal-footer ${styles.modalFooter}`}>
@@ -256,4 +252,4 @@ const DirectorsPage = () => {
   );
 };
 
-export default DirectorsPage;
+export default TypesPage;
