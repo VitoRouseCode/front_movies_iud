@@ -90,7 +90,14 @@ const GenresPage = () => {
     }
   };
 
-  if (loading) return <div className={styles.genresContainer}>Cargando...</div>;
+  if (loading) return (
+      <div className={styles.producersContainer} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+        <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
+          <span className="visually-hidden">Cargando...</span>
+        </div>
+        <p className="mt-3" style={{ color: '#FFFFFF' }}>Cargando generos...</p>
+      </div>
+    );
   if (error) return <div className={styles.genresContainer}>{error}</div>;
 
   return (

@@ -9,7 +9,7 @@ const WelcomPage = () => {
     <div className={styles.hero}>
       <Image
         src = {image}
-        alt="Fondo de películas"
+        alt="Fondo de películas" 
         fill={true}
         priority={true}
         loading="eager"

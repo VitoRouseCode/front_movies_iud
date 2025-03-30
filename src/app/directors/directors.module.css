@@ -1,50 +1,50 @@
-/* directors.module.css */
+
 .directorsContainer {
-  min-height: 75vh; /* Mantener altura mínima */
-  padding: 2rem; /* Mantener padding interno */
+  min-height: 75vh; 
+  padding: 2rem; 
   display: flex;
   flex-direction: column;
   
 }
 
-/* Ajustar estilos del formulario */
+
 .formLabel {
-  color: #FFFFFF; /* Texto blanco para etiquetas */
+  color: #FFFFFF; 
 }
 
-/* Ajustar estilos de la tabla */
+
 .table {
-  background-color: transparent; /* Fondo transparente para integrarse con el gradiente */
-  color: #FFFFFF; /* Texto blanco */
+  background-color: transparent; 
+  color: #FFFFFF; 
 }
 
 .table th,
 .table td {
-  border-color: #3A4066; /* Bordes más oscuros para contraste */
+  border-color: #3A4066; 
 }
 
 .table thead th {
-  background-color: #2D334A; /* Fondo más oscuro para la cabecera */
+  background-color: #2D334A; 
   color: #FFFFFF;
 }
 
 .table tbody tr {
-  background-color: #2D334A; /* Fondo de filas */
+  background-color: #2D334A;
 }
 
 .table tbody tr:hover {
-  background-color: #3A4066; /* Hover más claro */
+  background-color: #3A4066; 
 }
 
 /* Ajustar el modal */
 .modalContent {
-  background-color: #2D334A; /* Fondo oscuro para el modal */
+  background-color: #2D334A; 
   color: #FFFFFF;
 }
 
 .modalHeader,
 .modalFooter {
-  background-color: #1A1F2E; /* Fondo más oscuro para header y footer del modal */
+  background-color: #1A1F2E; 
   border-color: #3A4066;
 }
 
@@ -54,5 +54,8 @@
 }
 
 .btnClose {
-  filter: invert(1); /* Invertir color para que el botón de cerrar sea visible */
+  filter: invert(1); 
 }
+
+
+
