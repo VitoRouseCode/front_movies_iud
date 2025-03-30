@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://localhost:3100/api';
+
+import { API_BASE_URL } from './getMovies';
 
 // Obtener todos los géneros
 export const getGenres = async () => {
