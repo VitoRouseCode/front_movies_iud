@@ -1,6 +1,6 @@
 
 import React from 'react';
-import styles from './MovieCard.module.css'; // Importamos el módulo CSS
+import styles from './movieCard.module.css'; // Importamos el módulo CSS
 
 type MovieCardProps = {
   title: string;

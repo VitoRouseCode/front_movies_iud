@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
-import styles from './Navbar.module.css';
+import styles from './navbar.module.css';
 import Image from 'next/image';
 import image from '../../../public/logopeliculas.png';
 
